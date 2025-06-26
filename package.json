@@ -1,19 +1,24 @@
 {
-  "name": "framestate",
-  "version": "1.0.0",
-  "description": "A bridge for data exchange between an iframe widget and a React component",
-  "main": "src/index.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/genestash/framestate.git"
-  },
-  "author": "Gene",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/genestash/framestate/issues"
-  },
-  "homepage": "https://github.com/genestash/framestate#readme"
+	"name": "framestate",
+	"version": "1.0.0",
+	"description": "A lightweight bridge for seamless state synchronization between iframe widgets and React components",
+	"keywords": [
+		"react",
+		"iframe",
+		"state"
+	],
+	"author": "Gene",
+	"license": "ISC",
+	"main": "src/index.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/genestash/framestate.git"
+	},
+	"bugs": {
+		"url": "https://github.com/genestash/framestate/issues"
+	},
+	"homepage": "https://github.com/genestash/framestate#readme"
 }
