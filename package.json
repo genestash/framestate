@@ -1,0 +1,19 @@
+{
+  "name": "framestate",
+  "version": "1.0.0",
+  "description": "A bridge for data exchange between an iframe widget and a React component",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/genestash/framestate.git"
+  },
+  "author": "Gene",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/genestash/framestate/issues"
+  },
+  "homepage": "https://github.com/genestash/framestate#readme"
+}
