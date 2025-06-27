@@ -11,7 +11,7 @@
     "license": "ISC",
     "main": "src/index.ts",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "format": "prettier --cache --write ."
     },
     "repository": {
         "type": "git",
