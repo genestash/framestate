@@ -18,3 +18,5 @@ function subscribe(name: string, callback: VoidFunction) {}
 function useFrameState(name: string, initialValue: any) {}
 
 // Exports
+
+export default useFrameState;
