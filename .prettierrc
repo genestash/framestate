@@ -2,7 +2,7 @@
     "printWidth": 64,
     "tabWidth": 4,
     "arrowParens": "always",
-    "trailingComma": "es5",
+    "trailingComma": "none",
     "bracketSpacing": true,
     "singleQuote": true,
     "semi": true

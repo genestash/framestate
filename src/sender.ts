@@ -23,7 +23,7 @@ function emitState(name: string) {
     const data = {
         name: name,
         value: states[name],
-        isFrameState: true,
+        isFrameState: true
     };
 
     // Todo: secure origin
