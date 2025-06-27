@@ -23,6 +23,6 @@ import { useFrameState } from 'framestate';
 
 function DisplayValue() {
   const value = useFrameState('x');
-  return <h1>{value}</h1>;
+  return <h1>{ value }</h1>; // 12
 }
 ```
