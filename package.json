@@ -14,6 +14,7 @@
         "format": "prettier --cache --write .",
         "build": "tsc"
     },
+    "homepage": "https://github.com/genestash/framestate#readme",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/genestash/framestate.git"
@@ -21,7 +22,6 @@
     "bugs": {
         "url": "https://github.com/genestash/framestate/issues"
     },
-    "homepage": "https://github.com/genestash/framestate#readme",
     "devDependencies": {
         "eslint": "^9.29.0",
         "globals": "^16.2.0",
