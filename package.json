@@ -8,10 +8,10 @@
         "state"
     ],
     "author": "Gene",
-    "license": "ISC",
-    "main": "src/index.ts",
+    "license": "MIT",
     "scripts": {
-        "format": "prettier --cache --write ."
+        "format": "prettier --cache --write .",
+        "build": "tsc"
     },
     "repository": {
         "type": "git",
@@ -22,6 +22,7 @@
     },
     "homepage": "https://github.com/genestash/framestate#readme",
     "devDependencies": {
+        "typescript": "^5.8.3",
         "prettier": "3.6.1"
     }
 }
