@@ -12,7 +12,7 @@ window.addEventListener('message', (event: MessageEvent<Response>) => {
     const name = event.data.frameState?.name;
     const value = event.data.frameState?.value;
 
-    if (!name || !subscribers[name] || states[name] === value) {
+    if (!name || states[name] === value) {
         return;
     }
 

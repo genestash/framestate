@@ -10,6 +10,8 @@
     "author": "Gene",
     "license": "MIT",
     "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "scripts": {
         "format": "prettier --cache --write .",
         "build": "tsc"
