@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { isNonEmptyString } from './utils';
 import type { Request, Response, SubscriberCallback } from './types';
 
 // Containers
@@ -12,7 +13,7 @@ window.addEventListener('message', (event: MessageEvent<Response>) => {
     const name = event.data.frameState?.name;
     const value = event.data.frameState?.value;
 
-    if (!name || states[name] === value) {
+    if (!isNonEmptyString(name) || states[name] === value) {
         return;
     }
 
@@ -44,18 +45,13 @@ function subscribe(name: string, callback: SubscriberCallback): VoidFunction {
     };
 }
 
-function requestFrameState(name: string) {
-    if (!name) return;
-
+function getFrameState(name: string) {
     const iframes = document.querySelectorAll('iframe');
     const data: Request = { getFrameState: { name } };
 
     for (const iframe of iframes) {
         iframe.contentWindow?.postMessage(data, '*');
     }
-
-    // Sending messages to all iframes is a bad idea
-    // TODO: Add iframe selection logic
 }
 
 // Hooks
@@ -69,14 +65,22 @@ function useFrameState<T = unknown>(name: string, initialValue?: T): T {
     });
 
     useEffect(() => {
-        const unsubscribe = subscribe(name, (value) => {
-            setValue(value);
+        if (!isNonEmptyString(name)) {
+            return;
+        }
+
+        const unsubscribe = subscribe(name, (newValue) => {
+            setValue(newValue);
         });
 
-        requestFrameState(name);
+        getFrameState(name);
 
-        return () => unsubscribe();
+        return () => {
+            unsubscribe();
+        };
     }, [name]);
+
+    // TODO: Add isMounted check
 
     return value;
 }

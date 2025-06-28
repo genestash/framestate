@@ -1,3 +1,4 @@
+import { isNonEmptyString } from './utils';
 import type { Request, Response } from './types';
 
 // Containers
@@ -8,7 +9,11 @@ const states: Record<string, any> = {};
 
 window.addEventListener('message', (event: MessageEvent<Request>) => {
     const name = event.data.getFrameState?.name;
-    if (!name || !states.hasOwnProperty(name)) return;
+
+    if (!isNonEmptyString(name) || !states.hasOwnProperty(name)) {
+        return;
+    }
+
     emitFrameState(name);
 });
 
@@ -22,12 +27,14 @@ function emitFrameState(name: string) {
         }
     };
 
-    // TODO: secure origin
     window.parent.postMessage(data, '*');
 }
 
 function setFrameState(name: string, value: any) {
-    if (!name || states[name] === value) return;
+    if (!isNonEmptyString(name) || states[name] === value) {
+        return;
+    }
+
     states[name] = value;
     emitFrameState(name);
 }

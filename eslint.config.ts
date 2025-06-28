@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 // @ts-nocheck
 
 import globals from 'globals';
@@ -9,7 +8,7 @@ import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
     {
-        ignores: ['node_modules', 'dist']
+        ignores: ['*', '!src']
     },
     ...tseslint.configs.recommended,
     {
