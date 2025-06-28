@@ -25,6 +25,9 @@ window.addEventListener('message', (event: MessageEvent<Response>) => {
 
 // Functions
 
+/**
+ * @returns An unsubscribe function.
+ */
 function subscribe(name: string, callback: SubscriberCallback): VoidFunction {
     if (!subscribers[name]) {
         subscribers[name] = new Set();
@@ -41,7 +44,7 @@ function subscribe(name: string, callback: SubscriberCallback): VoidFunction {
     };
 }
 
-function getFrameState(name: string) {
+function requestFrameState(name: string) {
     if (!name) return;
 
     const iframes = document.querySelectorAll('iframe');
@@ -51,7 +54,7 @@ function getFrameState(name: string) {
         iframe.contentWindow?.postMessage(data, '*');
     }
 
-    // Sending messages to all iframes is a bad solution
+    // Sending messages to all iframes is a bad idea
     // TODO: Add iframe selection logic
 }
 
@@ -65,8 +68,15 @@ function useFrameState<T = unknown>(name: string, initialValue?: T): T {
         return states.hasOwnProperty(name) ? states[name] : initialValue;
     });
 
-    // TODO: Subscribe
-    // TODO: Synchronize
+    useEffect(() => {
+        const unsubscribe = subscribe(name, (value) => {
+            setValue(value);
+        });
+
+        requestFrameState(name);
+
+        return () => unsubscribe();
+    }, [name]);
 
     return value;
 }
