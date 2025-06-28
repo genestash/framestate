@@ -1,13 +1,13 @@
-export interface ResponseData {
-    frameState: {
+export interface Request {
+    getFrameState: {
         name: string;
-        value: any;
     };
 }
 
-export interface RequestData {
-    getFrameState: {
+export interface Response {
+    frameState: {
         name: string;
+        value: any;
     };
 }
 

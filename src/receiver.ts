@@ -1,4 +1,4 @@
-import type { RequestData, ResponseData, SubscriberCallback } from './types';
+import type { Request, Response, SubscriberCallback } from './types';
 
 // Containers
 
@@ -7,7 +7,7 @@ const subscribers: Record<string, Set<SubscriberCallback>> = {};
 
 // Listeners
 
-window.addEventListener('message', (event: MessageEvent<ResponseData>) => {
+window.addEventListener('message', (event: MessageEvent<Response>) => {
     if (!event.data.frameState) return;
     const name = event.data.frameState.name;
     const value = event.data.frameState.value;
@@ -41,7 +41,7 @@ function getFrameState(name: string) {
     if (!name) return;
 
     const iframes = document.querySelectorAll('iframe');
-    const data: RequestData = { getFrameState: { name } };
+    const data: Request = { getFrameState: { name } };
 
     for (const iframe of iframes) {
         iframe.contentWindow?.postMessage(data, '*');

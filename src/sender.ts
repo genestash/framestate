@@ -1,12 +1,12 @@
-import type { RequestData, ResponseData } from './types';
+import type { Request, Response } from './types';
 
 // Containers
 
-const states: Record<string, unknown> = {};
+const states: Record<string, any> = {};
 
 // Listeners
 
-window.addEventListener('message', (event: MessageEvent<RequestData>) => {
+window.addEventListener('message', (event: MessageEvent<Request>) => {
     if (!event.data.getFrameState) return;
     const name = event.data.getFrameState.name;
     emitFrameState(name);
@@ -17,7 +17,7 @@ window.addEventListener('message', (event: MessageEvent<RequestData>) => {
 function emitFrameState(name: string) {
     if (!states.hasOwnProperty(name)) return;
 
-    const data: ResponseData = {
+    const data: Response = {
         frameState: {
             name: name,
             value: states[name]
@@ -28,7 +28,7 @@ function emitFrameState(name: string) {
     window.parent.postMessage(data, '*');
 }
 
-function setFrameState(name: string, value: unknown) {
+function setFrameState(name: string, value: any) {
     if (states[name] === value) return;
     states[name] = value;
     emitFrameState(name);
