@@ -1,6 +1,6 @@
 # framestate
 
-A lightweight bridge for state synchronization between an iframe and React components in the parent window.
+A lightweight bridge for state synchronization between iframes and React components in the parent window.
 
 ## Installation
 

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import type { Request, Response, SubscriberCallback } from './types';
 
 // Containers
@@ -10,7 +11,11 @@ const subscribers: Record<string, Set<SubscriberCallback>> = {};
 window.addEventListener('message', (event: MessageEvent<Response>) => {
     const name = event.data.frameState?.name;
     const value = event.data.frameState?.value;
-    if (!name || states[name] === value) return;
+
+    if (!name || !subscribers[name] || states[name] === value) {
+        return;
+    }
+
     states[name] = value;
 
     for (const callback of subscribers[name]) {
@@ -47,12 +52,24 @@ function getFrameState(name: string) {
     }
 
     // Sending messages to all iframes is a bad solution
-    // TODO: add iframe selection logic
+    // TODO: Add iframe selection logic
 }
 
 // Hooks
 
-function useFrameState(name: string) {}
+/**
+ * @param initialValue - The value used until synchronization occurs.
+ */
+function useFrameState<T = unknown>(name: string, initialValue?: T): T {
+    const [value, setValue] = useState<T>(() => {
+        return states.hasOwnProperty(name) ? states[name] : initialValue;
+    });
+
+    // TODO: Subscribe
+    // TODO: Synchronize
+
+    return value;
+}
 
 // Exports
 

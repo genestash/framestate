@@ -1,7 +1,7 @@
 {
     "name": "framestate",
     "version": "1.0.0",
-    "description": "A lightweight bridge for seamless state synchronization between iframe widgets and React components",
+    "description": "A lightweight bridge for state synchronization between iframes and React components in the parent window",
     "keywords": [
         "react",
         "iframe",
@@ -22,11 +22,16 @@
     "bugs": {
         "url": "https://github.com/genestash/framestate/issues"
     },
+    "peerDependencies": {
+        "react": ">=17.0.0"
+    },
     "devDependencies": {
+        "@types/react": "^17.0.0",
         "eslint": "^9.29.0",
         "globals": "^16.2.0",
         "jiti": "^2.4.2",
         "prettier": "3.6.1",
+        "react": "^17.0.0",
         "typescript": "^5.8.3",
         "typescript-eslint": "^8.35.0"
     }
