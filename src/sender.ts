@@ -7,14 +7,14 @@ const states: Record<string, any> = {};
 // Listeners
 
 window.addEventListener('message', (event: MessageEvent<Request>) => {
-    emitFrameState(event.data.getFrameState?.name);
+    const name = event.data.getFrameState?.name;
+    if (!name || !states.hasOwnProperty(name)) return;
+    emitFrameState(name);
 });
 
 // Functions
 
 function emitFrameState(name: string) {
-    if (!name || !states.hasOwnProperty(name)) return;
-
     const data: Response = {
         frameState: {
             name: name,
