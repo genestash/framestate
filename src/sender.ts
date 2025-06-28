@@ -7,15 +7,13 @@ const states: Record<string, any> = {};
 // Listeners
 
 window.addEventListener('message', (event: MessageEvent<Request>) => {
-    if (!event.data.getFrameState) return;
-    const name = event.data.getFrameState.name;
-    emitFrameState(name);
+    emitFrameState(event.data.getFrameState?.name);
 });
 
 // Functions
 
 function emitFrameState(name: string) {
-    if (!states.hasOwnProperty(name)) return;
+    if (!name || !states.hasOwnProperty(name)) return;
 
     const data: Response = {
         frameState: {
@@ -29,7 +27,7 @@ function emitFrameState(name: string) {
 }
 
 function setFrameState(name: string, value: any) {
-    if (states[name] === value) return;
+    if (!name || states[name] === value) return;
     states[name] = value;
     emitFrameState(name);
 }

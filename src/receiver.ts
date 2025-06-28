@@ -8,14 +8,13 @@ const subscribers: Record<string, Set<SubscriberCallback>> = {};
 // Listeners
 
 window.addEventListener('message', (event: MessageEvent<Response>) => {
-    if (!event.data.frameState) return;
-    const name = event.data.frameState.name;
-    const value = event.data.frameState.value;
-    if (states[name] === value) return;
+    const name = event.data.frameState?.name;
+    const value = event.data.frameState?.value;
+    if (!name || states[name] === value) return;
     states[name] = value;
 
-    for (const subscriber of subscribers[name]) {
-        subscriber(states[name]);
+    for (const callback of subscribers[name]) {
+        callback(states[name]);
     }
 });
 
