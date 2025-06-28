@@ -3,12 +3,13 @@
 
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
     ...tseslint.configs.recommended,
     {
-        files: ['src/**/*'],
         languageOptions: {
             globals: globals.browser,
             parser: tseslint.parser
@@ -19,6 +20,20 @@ export default defineConfig([
         rules: {
             '@typescript-eslint/no-unused-vars': 'off',
             '@typescript-eslint/no-explicit-any': 'off'
+        }
+    },
+    react.configs.flat.recommended,
+    {
+        settings: {
+            react: {
+                version: 'detect'
+            }
+        },
+        plugins: {
+            'react-hooks': reactHooks
+        },
+        rules: {
+            ...reactHooks.configs.recommended.rules
         }
     }
 ]);
