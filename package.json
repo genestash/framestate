@@ -12,11 +12,13 @@
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
     "scripts": {
         "format": "prettier --cache --write .",
         "build": "tsc"
     },
-    "homepage": "https://github.com/genestash/framestate#readme",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/genestash/framestate.git"
