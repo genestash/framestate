@@ -6,12 +6,18 @@ const subscribers = {};
 // Listeners
 window.addEventListener('message', (event) => {
     var _a, _b;
+    if (event.source === window) {
+        return;
+    }
     const name = (_a = event.data.frameState) === null || _a === void 0 ? void 0 : _a.name;
     const value = (_b = event.data.frameState) === null || _b === void 0 ? void 0 : _b.value;
     if (!isNonEmptyString(name) || states[name] === value) {
         return;
     }
     states[name] = value;
+    if (!subscribers[name]) {
+        return;
+    }
     for (const callback of subscribers[name]) {
         callback(states[name]);
     }
