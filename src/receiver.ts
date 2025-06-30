@@ -78,7 +78,7 @@ function useFrameState<T = unknown>(name: string, initialValue?: T): T {
         }
 
         const unsubscribe = subscribe(name, (newValue) => {
-            setValue(newValue);
+            setValue(newValue as T);
         });
 
         getFrameState(name);
@@ -87,8 +87,6 @@ function useFrameState<T = unknown>(name: string, initialValue?: T): T {
             unsubscribe();
         };
     }, [name]);
-
-    // TODO: Add isMounted check
 
     return value;
 }

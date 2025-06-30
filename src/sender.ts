@@ -3,7 +3,7 @@ import type { Request, Response } from './types';
 
 // Containers
 
-const states: Record<string, any> = {};
+const states: Record<string, unknown> = {};
 
 // Listeners
 
@@ -30,7 +30,7 @@ function emitFrameState(name: string) {
     window.parent.postMessage(data, '*');
 }
 
-function setFrameState(name: string, value: any) {
+function setFrameState(name: string, value: unknown) {
     if (!isNonEmptyString(name) || states[name] === value) {
         return;
     }
