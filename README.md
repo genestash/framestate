@@ -19,7 +19,7 @@ import { setFrameState } from 'framestate';
 function Input() {
   const [text, setText] = useState('');
 
-  const update = (event: ChangeEvent<HTMLInputElement>) => {
+  const update = (event: React.ChangeEvent<HTMLInputElement>) => {
 	setText(event.target.value);
   };
 
