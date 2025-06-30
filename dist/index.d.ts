@@ -1,3 +1,2 @@
-import setFrameState from './sender';
-import useFrameState from './receiver';
-export { setFrameState, useFrameState };
+import { useFrameState } from './hook';
+export { useFrameState };

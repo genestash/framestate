@@ -1,12 +1,7 @@
-export interface Request {
-    getFrameState: {
-        name: string;
-    };
+export interface StatePayload {
+    name: string;
+    value: unknown;
+    source: number;
+    isFrameState: true;
 }
-export interface Response {
-    frameState: {
-        name: string;
-        value: any;
-    };
-}
-export type SubscriberCallback = (value: any) => void;
+export type SubscriberCallback = (value: unknown, id: number) => void;
