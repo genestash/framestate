@@ -7,8 +7,8 @@ export interface Request {
 export interface Response {
     frameState: {
         name: string;
-        value: any;
+        value: unknown;
     };
 }
 
-export type SubscriberCallback = (value: any) => void;
+export type SubscriberCallback = (value: unknown) => void;
