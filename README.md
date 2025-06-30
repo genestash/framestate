@@ -25,11 +25,7 @@ function Input() {
 
   setFrameState('message', text);
 
-  return (
-	<>
-		<input value={text} onChange={update} />
-	</>
-  );
+  return <input value={text} onChange={update} />;
 }
 ```
 
