@@ -8,25 +8,26 @@ A lightweight bridge for state synchronization between iframes and React compone
 npm install framestate
 ```
 
-## Usage in the iframe
+## Usage inside the iframe
 
-Example:
+Use `setFrameState(stateName, stateValue)` to update the state.
 
 ```ts
+import { useState } from 'react';
 import { setFrameState } from 'framestate';
 
-function DisplayValue() {
-  const [value, setValue] = useState('');
+function Input() {
+  const [text, setText] = useState('');
 
-  const update = (event) => {
-	setValue(event.target.value);
+  const update = (event: ChangeEvent<HTMLInputElement>) => {
+	setText(event.target.value);
   };
 
-  setFrameState('counter', value);
+  setFrameState('message', text);
 
   return (
 	<>
-		<input value={value} onChange={() => setValue(event.target.value)} />
+		<input value={text} onChange={update} />
 	</>
   );
 }
@@ -34,13 +35,13 @@ function DisplayValue() {
 
 ## Usage in the parent window
 
-Example:
+Use `useFrameState(stateName)` hook to access the state. The component re-renders when the state changes.
 
 ```ts
 import { useFrameState } from 'framestate';
 
 function Message() {
-  const value = useFrameState('message');
-  return <h1>{value}</h1>;
+  const text = useFrameState<string>('message');
+  return <h1>{text}</h1>;
 }
 ```
