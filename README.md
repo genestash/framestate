@@ -10,7 +10,7 @@ npm install framestate
 
 ## Usage inside the iframe
 
-Use `setFrameState(stateName, stateValue)` to update the state.
+Use `setFrameState(name, value)` to update the state.
 
 ```ts
 import { useState } from 'react';
@@ -31,7 +31,7 @@ function Input() {
 
 ## Usage in the parent window
 
-Use `useFrameState(stateName)` hook to access the state. The component re-renders when the state changes.
+Use `useFrameState(name)` hook to access the state. The component re-renders when the state changes.
 
 ```ts
 import { useFrameState } from 'framestate';
