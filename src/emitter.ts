@@ -1,23 +1,23 @@
-import type { StatePayload } from './types';
+import { EmitDirection, StatePayload } from './types';
 
-function emitFrameState(name: string, value: unknown, source: number) {
+function emitFrameState(name: string, value: unknown, direction: EmitDirection) {
     const data: StatePayload = {
         name,
         value,
-        source,
+        direction,
         isFrameState: true
     };
 
-    // Emit upward
+    if (direction == EmitDirection.Up || direction == EmitDirection.Both) {
+        window.parent.postMessage({ ...data, direction: EmitDirection.Up }, '*');
+    }
 
-    window.parent.postMessage(data, '*');
+    if (direction == EmitDirection.Down || direction == EmitDirection.Both) {
+        const iframes = document.querySelectorAll('iframe');
 
-    // Emit downward
-
-    const iframes = document.querySelectorAll('iframe');
-
-    for (const iframe of iframes) {
-        iframe.contentWindow?.postMessage(data, '*');
+        for (const iframe of iframes) {
+            iframe.contentWindow?.postMessage({ ...data, direction: EmitDirection.Down }, '*');
+        }
     }
 }
 

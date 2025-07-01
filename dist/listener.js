@@ -1,23 +1,14 @@
-import { isNonEmptyString } from './utils';
-import { states, subscribers } from './container';
+import { update } from './manager';
 function runStateListener() {
-    window.addEventListener('message', (event) => {
+    const handleMessage = (event) => {
+        if (window === event.source) {
+            return;
+        }
         if (!event.data.isFrameState) {
             return;
         }
-        const name = event.data.name;
-        const value = event.data.value;
-        const source = event.data.source;
-        if (!isNonEmptyString(name) || states[name] === value) {
-            return;
-        }
-        states[name] = value;
-        if (!subscribers[name]) {
-            return;
-        }
-        for (const callback of subscribers[name]) {
-            callback(states[name], source);
-        }
-    });
+        update(event.data.name, event.data.value, event.data.direction);
+    };
+    window.addEventListener('message', handleMessage);
 }
 export { runStateListener };

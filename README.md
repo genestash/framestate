@@ -1,6 +1,6 @@
 # framestate
 
-A lightweight bridge for state synchronization between iframes and React components in the parent window.
+State synchronization between React components and iframes.
 
 ## Installation
 
@@ -8,21 +8,31 @@ A lightweight bridge for state synchronization between iframes and React compone
 npm install framestate
 ```
 
-## Usage inside the iframe
-
-```ts
-import { setFrameState } from 'framestate';
-
-setFrameState('x', 12);
-```
-
-## Usage in the parent window
+## Usage in the page
 
 ```ts
 import { useFrameState } from 'framestate';
 
-function DisplayValue() {
-  const value = useFrameState('x');
-  return <h1>{value}</h1>; // 12
+function Input() {
+  const [text, setText] = useFrameState('message');
+
+  const update = (event: React.ChangeEvent<HTMLInputElement>) => {
+	setText(event.target.value);
+  };
+
+  return <input value={text} onChange={update} />;
 }
 ```
+
+## Usage in the iframe
+
+```ts
+import { useFrameState } from 'framestate';
+
+function Message() {
+  const [text] = useFrameState('message');
+  return <p>{text}</p>;
+}
+```
+
+State synchronization propagates in both directions, allowing you to pass data from the page to the iframe, as well as from the iframe back to the page.

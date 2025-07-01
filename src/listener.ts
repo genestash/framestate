@@ -1,31 +1,20 @@
-import { isNonEmptyString } from './utils';
-import { states, subscribers } from './container';
-import type { StatePayload } from './types';
+import { update } from './manager';
+import { StatePayload } from './types';
 
 function runStateListener() {
-    window.addEventListener('message', (event: MessageEvent<StatePayload>) => {
+    const handleMessage = (event: MessageEvent<StatePayload>) => {
+        if (window === event.source) {
+            return;
+        }
+
         if (!event.data.isFrameState) {
             return;
         }
 
-        const name = event.data.name;
-        const value = event.data.value;
-        const source = event.data.source;
+        update(event.data.name, event.data.value, event.data.direction);
+    };
 
-        if (!isNonEmptyString(name) || states[name] === value) {
-            return;
-        }
-
-        states[name] = value;
-
-        if (!subscribers[name]) {
-            return;
-        }
-
-        for (const callback of subscribers[name]) {
-            callback(states[name], source);
-        }
-    });
+    window.addEventListener('message', handleMessage);
 }
 
 export { runStateListener };
