@@ -1,7 +1,7 @@
 {
     "name": "framestate",
-    "version": "1.0.0",
-    "description": "A lightweight bridge for state synchronization between iframes and React components in the parent window",
+    "version": "2.0.0",
+    "description": "State synchronization between React components and iframes",
     "keywords": [
         "react",
         "iframe",
@@ -19,7 +19,6 @@
         "format": "prettier --cache --write .",
         "build": "tsc"
     },
-    "homepage": "https://github.com/genestash/framestate#readme",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/genestash/framestate.git"
