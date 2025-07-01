@@ -1,12 +1,16 @@
-export interface Request {
-    getFrameState: {
-        name: string;
-    };
+/**
+ * @param Up - Emit to the parent window
+ * @param Down - Emit to the all iframes on the page
+ */
+export declare enum EmitDirection {
+    Up = 0,
+    Down = 1,
+    Both = 2
 }
-export interface Response {
-    frameState: {
-        name: string;
-        value: any;
-    };
+export interface StatePayload {
+    name: string;
+    value: unknown;
+    direction: EmitDirection;
+    isFrameState: true;
 }
-export type SubscriberCallback = (value: any) => void;
+export type SubscriberCallback = (value: unknown) => void;

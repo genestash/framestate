@@ -10,6 +10,9 @@
     "author": "Gene",
     "license": "MIT",
     "type": "module",
+    "files": [
+        "dist"
+    ],
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
